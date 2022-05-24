@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LockerTest {
@@ -25,9 +26,20 @@ public class LockerTest {
 
         locker.storeBag(new Bag());
 
-        Assertions.assertThrows(LockerIsFullException.class,()->{
+        Assertions.assertThrows(LockerIsFullException.class, () -> {
             locker.storeBag(new Bag());
         });
+    }
+
+    @Test
+    void should_get_bag_when_pick_up_given_valid_ticket() {
+        Locker locker = new Locker(1);
+        Bag bagStored = new Bag();
+        Ticket ticket = locker.storeBag(bagStored);
+
+        Bag bagPickedUp = locker.pickUp(ticket);
+
+        assertSame(bagPickedUp, bagStored);
     }
 
 
