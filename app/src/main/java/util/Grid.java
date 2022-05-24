@@ -1,4 +1,4 @@
-package locker;
+package util;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
