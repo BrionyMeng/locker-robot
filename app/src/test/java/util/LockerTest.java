@@ -1,14 +1,12 @@
 package util;
 
+import exception.InvalidTicketException;
 import exception.LockerIsFullException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LockerTest {
     @Test
@@ -42,5 +40,24 @@ public class LockerTest {
         assertSame(bagPickedUp, bagStored);
     }
 
+    @Test
+    void should_throw_InvalidTicketException_when_pick_up_given_invalid_ticket() {
+        Locker locker = new Locker(1);
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
+            locker.pickUp(null);
+        });
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_pick_up_given_a_reused_ticket() {
+        Locker locker = new Locker(1);
+        Ticket ticket= locker.storeBag(new Bag());
+        locker.pickUp(ticket);
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
+            locker.pickUp(ticket);
+        });
+    }
 
 }
