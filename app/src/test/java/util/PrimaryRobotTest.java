@@ -1,5 +1,6 @@
 package util;
 
+import exception.InvalidTicketException;
 import exception.LockerIsFullException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -54,5 +55,12 @@ public class PrimaryRobotTest {
 
         Bag bagPickedUp = robot.pickUp(ticket);
         assertSame(myBag, bagPickedUp);
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_pick_up_bag_given_invalid_ticket() {
+        PrimaryRobot robot = new PrimaryRobot(Arrays.asList(new Locker(1), new Locker(1)));
+
+        Assertions.assertThrows(InvalidTicketException.class,()->robot.pickUp(new Ticket()));
     }
 }

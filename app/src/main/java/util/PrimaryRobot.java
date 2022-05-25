@@ -1,5 +1,6 @@
 package util;
 
+import exception.InvalidTicketException;
 import exception.LockerIsFullException;
 
 import java.util.List;
@@ -26,6 +27,6 @@ public class  PrimaryRobot {
                 return locker.pickUp(ticket);
             }
         }
-        return null;
+        throw new InvalidTicketException();
     }
 }
