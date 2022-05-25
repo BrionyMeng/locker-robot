@@ -22,4 +22,13 @@ public class SmartRobot {
         }
         return maxAvailableCapacityLocker;
     }
+
+    public Bag pickUp(Ticket ticket) {
+        for (Locker locker : lockers) {
+            if (locker.contains(ticket)) {
+                return locker.pickUp(ticket);
+            }
+        }
+        return null;
+    }
 }
