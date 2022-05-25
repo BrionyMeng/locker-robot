@@ -1,5 +1,7 @@
 package util;
 
+import exception.LockerIsFullException;
+
 import java.util.List;
 
 public class  PrimaryRobot {
@@ -15,6 +17,6 @@ public class  PrimaryRobot {
                 return locker.storeBag(myBag);
             }
         }
-        return null;
+        throw new LockerIsFullException();
     }
 }
