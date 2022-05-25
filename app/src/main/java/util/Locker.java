@@ -30,4 +30,8 @@ public class Locker {
         if (bag==null) throw new InvalidTicketException();
         return bag;
     }
+
+    public boolean isFull(){
+        return availableCapacity==0;
+    }
 }

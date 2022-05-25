@@ -10,6 +10,11 @@ public class  PrimaryRobot {
     }
 
     public Ticket storeBag(Bag myBag) {
-        return lockers.get(0).storeBag(myBag);
+        for (Locker locker:lockers){
+            if (!locker.isFull()) {
+                return locker.storeBag(myBag);
+            }
+        }
+        return null;
     }
 }
