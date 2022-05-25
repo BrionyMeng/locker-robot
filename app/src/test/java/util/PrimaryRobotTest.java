@@ -45,4 +45,14 @@ public class PrimaryRobotTest {
             robot.storeBag(new Bag());
         });
     }
+
+    @Test
+    void should_return_bag_when_pick_up_bag_given_valid_ticket() {
+        PrimaryRobot robot = new PrimaryRobot(Arrays.asList(new Locker(1), new Locker(1)));
+        Bag myBag = new Bag();
+        Ticket ticket = robot.storeBag(myBag);
+
+        Bag bagPickedUp = robot.pickUp(ticket);
+        assertSame(myBag, bagPickedUp);
+    }
 }
