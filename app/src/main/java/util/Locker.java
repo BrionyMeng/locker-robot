@@ -7,6 +7,11 @@ import java.util.HashMap;
 
 public class Locker {
     private int capacity;
+
+    public int getAvailableCapacity() {
+        return availableCapacity;
+    }
+
     private int availableCapacity;
     private final HashMap<Ticket,Bag> storedBags=new HashMap<>();
 
