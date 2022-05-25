@@ -81,5 +81,17 @@ public class SmartRobotTest {
         assertSame(bagStored, bagPickedUp);
     }
 
+    @Test
+    void should_get_the_bag_when_primary_robot_pick_up_bag_given_a_valid_ticket_from_smart_robot() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        SmartRobot smartRobot = new SmartRobot(firstLocker, secondLocker);
+        PrimaryRobot primaryRobot = new PrimaryRobot(firstLocker, secondLocker);
+        Bag bagStored = new Bag();
+        Ticket ticket = smartRobot.storeBag(bagStored);
 
+        Bag bagPickedUp = primaryRobot.pickUp(ticket);
+
+        assertSame(bagStored, bagPickedUp);
+    }
 }
