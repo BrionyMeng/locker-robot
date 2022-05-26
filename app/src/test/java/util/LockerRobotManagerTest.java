@@ -89,4 +89,17 @@ public class LockerRobotManagerTest {
         assertNotNull(ticket);
         assertSame(bagStored, robotLocker.pickUp(ticket));
     }
+
+    @Test
+    void should_return_ticket_and_store_by_locker_when_save_bag_given_manager_has_a_available_locker_and_a_full_robot() {
+        Locker managerLocker = new Locker(1);
+        LockerRobotManager manager = new LockerRobotManager(asList(new PrimaryRobot(new Locker(1)), managerLocker));
+        manager.storeBag(new Bag());
+
+        Bag bagStored = new Bag();
+        Ticket ticket = manager.storeBag(bagStored);
+
+        assertNotNull(ticket);
+        assertSame(bagStored, managerLocker.pickUp(ticket));
+    }
 }
