@@ -1,5 +1,7 @@
 package util;
 
+import exception.LockerIsFullException;
+
 import java.util.List;
 
 public class LockerRobotManager {
@@ -18,6 +20,6 @@ public class LockerRobotManager {
                 return locker.storeBag(bag);
             }
         }
-        return null;
+        throw new LockerIsFullException();
     }
 }

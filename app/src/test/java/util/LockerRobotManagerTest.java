@@ -1,11 +1,13 @@
 package util;
 
+import exception.LockerIsFullException;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LockerRobotManagerTest {
     @Test
@@ -31,5 +33,14 @@ public class LockerRobotManagerTest {
 
         assertNotNull(ticket);
         assertSame(bagStored, secondLocker.pickUp(ticket));
+    }
+
+    @Test
+    void should_throw_LockerIsFullException_when_save_bag_given_manager_has_two_full_lockers_and_no_robot() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new Locker(1), new Locker(1)), emptyList());
+        manager.storeBag(new Bag());
+        manager.storeBag(new Bag());
+
+        assertThrows(LockerIsFullException.class,()->manager.storeBag(new Bag()));
     }
 }
