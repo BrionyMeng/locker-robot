@@ -6,4 +6,6 @@ public interface Storable {
     Bag pickUp(Ticket ticket);
 
     boolean isFull();
+
+    boolean contains(Ticket ticket);
 }

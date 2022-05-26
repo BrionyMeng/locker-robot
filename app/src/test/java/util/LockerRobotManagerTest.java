@@ -1,5 +1,6 @@
 package util;
 
+import exception.InvalidTicketException;
 import exception.LockerIsFullException;
 import org.junit.jupiter.api.Test;
 
@@ -119,7 +120,26 @@ public class LockerRobotManagerTest {
         Bag bagStored = new Bag();
         Ticket ticket = manager.storeBag(bagStored);
 
-        assertNotNull(ticket);
+        assertSame(bagStored, manager.pickUp(ticket));
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_pick_up_given_manager_has_2_lockers_and_ticket_is_invalid() {
+        LockerRobotManager manager = new LockerRobotManager(asList(new Locker(1),new Locker(1)));
+        manager.storeBag(new Bag());
+
+        assertThrows(InvalidTicketException.class,()->manager.pickUp(new Ticket()));
+    }
+
+    @Test
+    void should_return_bag_when_pick_up_given_manager_has_2_lockers_first_is_full_and_no_robot_and_ticket_is_valid() {
+        Locker firstLocker = new Locker(1);
+        LockerRobotManager manager = new LockerRobotManager(asList(firstLocker, new Locker(1)));
+        firstLocker.storeBag(new Bag());
+
+        Bag bagStored = new Bag();
+        Ticket ticket = manager.storeBag(bagStored);
+
         assertSame(bagStored, manager.pickUp(ticket));
     }
 }

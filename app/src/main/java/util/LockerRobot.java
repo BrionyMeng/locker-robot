@@ -29,4 +29,9 @@ public abstract class LockerRobot implements Storable{
     public boolean isFull() {
         return Arrays.stream(lockers).allMatch(Locker::isFull);
     }
+
+    @Override
+    public boolean contains(Ticket ticket){
+        return Arrays.stream(lockers).anyMatch(locker -> locker.contains(ticket));
+    }
 }

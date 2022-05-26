@@ -1,5 +1,6 @@
 package util;
 
+import exception.InvalidTicketException;
 import exception.LockerIsFullException;
 
 import java.util.List;
@@ -22,6 +23,11 @@ public class LockerRobotManager {
     }
 
     public Bag pickUp(Ticket ticket) {
-        return storables.get(0).pickUp(ticket);
+        for (Storable storable : storables) {
+            if(storable.contains(ticket)){
+                return storable.pickUp(ticket);
+            }
+        }
+        throw new InvalidTicketException();
     }
 }
