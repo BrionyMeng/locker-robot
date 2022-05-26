@@ -10,5 +10,3 @@ O
 tasking.md,d/5/d51beefca104b32de83385bdfc37f68a2b7a424d
 R
 "app/src/main/java/util/Ticket.java,9/5/95f2fbf39f90ab3466b8c3c26ea4f3adb662881e
-V
-&app/src/test/java/util/LockerTest.java,0/e/0e89955a474a6a32c5ba61243f451527c8394d6e

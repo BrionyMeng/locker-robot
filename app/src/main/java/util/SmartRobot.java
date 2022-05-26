@@ -1,12 +1,9 @@
 package util;
 
-import exception.InvalidTicketException;
-
-public class SmartRobot {
-    private final Locker[] lockers;
+public class SmartRobot extends LockerRobot {
 
     public SmartRobot(Locker... lockers) {
-        this.lockers = lockers;
+        super(lockers);
     }
 
     public Ticket storeBag(Bag bag) {
@@ -25,12 +22,4 @@ public class SmartRobot {
         return maxAvailableCapacityLocker;
     }
 
-    public Bag pickUp(Ticket ticket) {
-        for (Locker locker : lockers) {
-            if (locker.contains(ticket)) {
-                return locker.pickUp(ticket);
-            }
-        }
-        throw new InvalidTicketException();
-    }
 }
