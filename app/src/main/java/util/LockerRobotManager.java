@@ -20,4 +20,8 @@ public class LockerRobotManager {
         }
         throw new LockerIsFullException();
     }
+
+    public Bag pickUp(Ticket ticket) {
+        return storables.get(0).pickUp(ticket);
+    }
 }
