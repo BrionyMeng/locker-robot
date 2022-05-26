@@ -1,5 +1,7 @@
 package util;
 
+import exception.InvalidTicketException;
+
 public class SmartRobot {
     private final Locker[] lockers;
 
@@ -29,6 +31,6 @@ public class SmartRobot {
                 return locker.pickUp(ticket);
             }
         }
-        return null;
+        throw new InvalidTicketException();
     }
 }
