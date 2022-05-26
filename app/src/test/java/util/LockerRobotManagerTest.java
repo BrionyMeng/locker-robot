@@ -154,4 +154,15 @@ public class LockerRobotManagerTest {
 
         assertSame(bagStored, manager.pickUp(ticket));
     }
+
+    @Test
+    void should_throw_InvalidTicketException_when_pick_up_given_manager_has_2_robots_and_no_locker_and_ticket_is_invalid() {
+        LockerRobotManager manager = new LockerRobotManager(
+                asList(new PrimaryRobot(new Locker(1)), new PrimaryRobot(new Locker(1)))
+        );
+        manager.storeBag(new Bag());
+
+
+        assertThrows(InvalidTicketException.class,()->manager.pickUp(new Ticket()));
+    }
 }
