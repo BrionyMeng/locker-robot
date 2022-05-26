@@ -2,6 +2,9 @@ package util;
 
 import exception.InvalidTicketException;
 
+import java.util.Arrays;
+
+
 public abstract class LockerRobot {
     protected final Locker[] lockers;
 
@@ -18,5 +21,9 @@ public abstract class LockerRobot {
             }
         }
         throw new InvalidTicketException();
+    }
+
+    public boolean isFull() {
+        return Arrays.stream(lockers).allMatch(Locker::isFull);
     }
 }

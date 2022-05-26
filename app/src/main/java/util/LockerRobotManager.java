@@ -15,10 +15,11 @@ public class LockerRobotManager {
     }
 
     public Ticket storeBag(Bag bag) {
-        if (!robots.isEmpty()) {
-            return robots.get(0).storeBag(bag);
+        for (LockerRobot robot : robots) {
+            if (!robot.isFull()) {
+                return robot.storeBag(bag);
+            }
         }
-
         for (Locker locker : lockers) {
             if (!locker.isFull()) {
                 return locker.storeBag(bag);
