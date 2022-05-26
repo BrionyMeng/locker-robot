@@ -6,24 +6,17 @@ import java.util.List;
 
 public class LockerRobotManager {
 
-    private final List<Locker> lockers;
-    private final List<LockerRobot> robots;
+    private final List<Storable> storables;
 
-    public LockerRobotManager(List<Locker> lockers, List<LockerRobot> robots) {
-        this.lockers = lockers;
-        this.robots = robots;
+    public LockerRobotManager(List<Storable> storables) {
+        this.storables = storables;
     }
 
     public Ticket storeBag(Bag bag) {
-        for (LockerRobot robot : robots) {
-            if (!robot.isFull()) {
-                return robot.storeBag(bag);
-            }
-        }
-        for (Locker locker : lockers) {
-            if (!locker.isFull()) {
-                return locker.storeBag(bag);
-            }
+        for (Storable storable : storables) {
+           if(!storable.isFull()){
+               return storable.storeBag(bag);
+           }
         }
         throw new LockerIsFullException();
     }
