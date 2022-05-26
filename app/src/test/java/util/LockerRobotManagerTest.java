@@ -165,4 +165,27 @@ public class LockerRobotManagerTest {
 
         assertThrows(InvalidTicketException.class,()->manager.pickUp(new Ticket()));
     }
+
+    @Test
+    void should_return_bag_when_pick_up_given_manager_has_a_robot_and_a_locker_and_ticket_is_valid() {
+        LockerRobotManager manager = new LockerRobotManager(
+                asList(new PrimaryRobot(new Locker(1)), new PrimaryRobot(new Locker(1)),new Locker(1))
+        );
+
+        Bag bagStored = new Bag();
+        Ticket ticket = manager.storeBag(bagStored);
+
+        assertSame(bagStored, manager.pickUp(ticket));
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_pick_up_manager_has_a_robot_and_a_locker_and_ticket_is_invalid() {
+        LockerRobotManager manager = new LockerRobotManager(
+                asList(new PrimaryRobot(new Locker(1)), new PrimaryRobot(new Locker(1)),new Locker(1))
+        );
+        manager.storeBag(new Bag());
+
+
+        assertThrows(InvalidTicketException.class,()->manager.pickUp(new Ticket()));
+    }
 }
