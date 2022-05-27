@@ -3,6 +3,7 @@ package util;
 import exception.InvalidTicketException;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 public abstract class LockerRobot implements Storable{
@@ -43,5 +44,9 @@ public abstract class LockerRobot implements Storable{
     @Override
     public int getCapacity() {
         return Arrays.stream(lockers).mapToInt(Locker::getCapacity).sum();
+    }
+
+    public List<Locker> getLockers() {
+        return List.of(lockers);
     }
 }

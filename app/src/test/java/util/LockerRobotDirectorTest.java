@@ -21,6 +21,21 @@ public class LockerRobotDirectorTest {
         assertEquals("M 4 13\n\tL 1 8\n\tL 3 5", report);
     }
 
+    @Test
+    public void should_return_M_3_10_R_1_5_L15_L2_5_when_generate_report_given_one_manager_has_a_robot_with_a_locker_1_5_and_a_locker_2_5() {
+        Locker robotLocker = new Locker(5);
+        Locker managerLocker = new Locker(5);
+        LockerRobotDirector director = new LockerRobotDirector(singletonList(new LockerRobotManager(
+                asList(new PrimaryRobot(robotLocker), managerLocker))));
+
+        storeBags(robotLocker, 4);
+        storeBags(managerLocker, 3);
+
+        String report = director.generateReport();
+
+        assertEquals("M 3 10\n\tR 1 5\n\t\tL 1 5\n\tL 2 5", report);
+    }
+
     private void storeBags(Locker locker, int times) {
         for (int i = 0; i < times; i++) {
             locker.storeBag(new Bag());
