@@ -15,19 +15,31 @@ public class LockerRobotManager {
 
     public Ticket storeBag(Bag bag) {
         for (Storable storable : storables) {
-           if(!storable.isFull()){
-               return storable.storeBag(bag);
-           }
+            if (!storable.isFull()) {
+                return storable.storeBag(bag);
+            }
         }
         throw new LockerIsFullException();
     }
 
     public Bag pickUp(Ticket ticket) {
         for (Storable storable : storables) {
-            if(storable.contains(ticket)){
+            if (storable.contains(ticket)) {
                 return storable.pickUp(ticket);
             }
         }
         throw new InvalidTicketException();
+    }
+
+    public int getAvailableCapacity() {
+        return storables.stream().mapToInt(Storable::getAvailableCapacity).sum();
+    }
+
+    public int getCapacity() {
+        return storables.stream().mapToInt(Storable::getCapacity).sum();
+    }
+
+    public List<Storable> getStorables() {
+        return storables;
     }
 }

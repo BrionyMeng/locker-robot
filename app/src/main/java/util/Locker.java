@@ -7,11 +7,6 @@ import java.util.HashMap;
 
 public class Locker implements Storable{
     private int capacity;
-
-    public int getAvailableCapacity() {
-        return availableCapacity;
-    }
-
     private int availableCapacity;
     private final HashMap<Ticket,Bag> storedBags=new HashMap<>();
 
@@ -46,5 +41,15 @@ public class Locker implements Storable{
     @Override
     public boolean contains(Ticket ticket) {
         return storedBags.containsKey(ticket);
+    }
+
+    @Override
+    public int getAvailableCapacity(){
+        return availableCapacity;
+    }
+
+    @Override
+    public int getCapacity(){
+        return capacity;
     }
 }
